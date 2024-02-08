@@ -9,3 +9,6 @@ require('plugins')
 
 --load theme
 require('colorscheme')
+
+--load lsp
+require('lsp')

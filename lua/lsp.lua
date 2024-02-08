@@ -11,8 +11,9 @@ require("mason").setup({
 
 require("mason-lspconfig").setup({
 	-- A list of servers to automatically install if they're not already installed
-	ensure_installed = { "pylsp", "gopls", "lua_ls", "bashls", "rust_analyzer" },
+	ensure_installed = { "lua_ls", "bashls", "rust_analyzer" },
 })
+
 
 -- Set different settings for different languages' LSP
 -- LSP list: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -39,7 +40,7 @@ local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	--vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
@@ -72,6 +73,10 @@ lspconfig.pylsp.setup({
 
 lspconfig.gopls.setup({
 	on_attach = on_attach,
+})
+
+lspconfig.fortls.setup({
+    on_attach = on_attach,
 })
 
 lspconfig.lua_ls.setup({
